@@ -1,12 +1,12 @@
-function handleSubmit(event) {
-  event.preventDefault();
-  alert("Hello, world!");
-}
+function Form(props) {
+  function handleSubmit(event) {
+    event.preventDefault();
+    props.addTask("Say hello!");
+  }
 
 
-function Form() {
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <h2 className="label-wrapper">
         <label htmlFor="new-todo-input" className="label__lg">
           What needs to be done?
