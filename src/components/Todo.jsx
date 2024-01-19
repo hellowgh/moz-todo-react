@@ -1,4 +1,4 @@
-function Todo ({name, completed, id, toggleTaskCompeted}) {
+function Todo ({name, completed, id, toggleTaskCompeted, deleteTask}) {
   return (
     <li className="todo stack-small">
       <div className="c-cb">
@@ -11,7 +11,7 @@ function Todo ({name, completed, id, toggleTaskCompeted}) {
         <button type="button" className="btn">
           Edit <span className="visually-hidden">{name}</span>
         </button>
-        <button type="button" className="btn btn__danger">
+        <button onClick={() => deleteTask(id)} type="button" className="btn btn__danger">
           Delete <span className="visually-hidden">{name}</span>
         </button>
       </div>

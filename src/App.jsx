@@ -11,6 +11,7 @@ function App(props) {
   function toggleTaskCompeted(id) {
     const updateList = tasks.map(t => {
       if (t.id === id) {
+        // 可以这样更新对象
         return {...t, completed: !t.completed}
       }
 
@@ -27,6 +28,7 @@ function App(props) {
       completed={task.completed}
       key={task.id}
       toggleTaskCompeted={toggleTaskCompeted}
+      deleteTask={deleteTask}
     />
   ));
 
@@ -37,6 +39,12 @@ function App(props) {
   function addTask(name) {
     const newTask = { id: `todo-${nanoid()}`, name, completed: false };
     setTasks([...tasks, newTask]);
+  }
+
+  function deleteTask(id) {
+    const remaining = tasks.filter(t => t.id !== id)
+
+    setTasks(remaining);
   }
 
   return (
