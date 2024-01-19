@@ -1,8 +1,8 @@
-function Todo ({name, completed, id}) {
+function Todo ({name, completed, id, toggleTaskCompeted}) {
   return (
     <li className="todo stack-small">
       <div className="c-cb">
-        <input id={id} type="checkbox" defaultChecked={completed}/>
+        <input onChange={() => toggleTaskCompeted(id)} id={id} type="checkbox" defaultChecked={completed}/>
         <label className="todo-label" htmlFor={id}>
           {name}
         </label>

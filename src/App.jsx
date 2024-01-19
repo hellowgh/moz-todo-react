@@ -8,20 +8,36 @@ import {nanoid} from "nanoid";
 function App(props) {
   const [tasks, setTasks] = useState(props.tasks);
 
+  function toggleTaskCompeted(id) {
+    const updateList = tasks.map(t => {
+      if (t.id === id) {
+        return {...t, completed: !t.completed}
+      }
+
+      return t;
+    })
+
+    setTasks(updateList)
+  }
+
   const taskList = tasks?.map((task) => (
     <Todo
       id={task.id}
       name={task.name}
       completed={task.completed}
       key={task.id}
+      toggleTaskCompeted={toggleTaskCompeted}
     />
   ));
+
+  const tasksNoun = taskList.length !== 1 ? "tasks" : "task";
+  const headingText = `${taskList.length} ${tasksNoun} remaining`;
+
 
   function addTask(name) {
     const newTask = { id: `todo-${nanoid()}`, name, completed: false };
     setTasks([...tasks, newTask]);
   }
-
 
   return (
     <div className="todoapp stack-large">
@@ -32,7 +48,7 @@ function App(props) {
         <FilterButton />
         <FilterButton />
       </div>
-      <h2 id="list-heading">3 tasks remaining</h2>
+      <h2 id="list-heading">{headingText}</h2>
       <ul
         role="list"
         className="todo-list stack-large stack-exception"
